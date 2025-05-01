@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace projectRest.Migrations
 {
     [DbContext(typeof(ResturantdbContext))]
-    [Migration("20250417054320_initial")]
-    partial class initial
+    [Migration("20250501133953_stat")]
+    partial class stat
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.4")
+                .HasAnnotation("ProductVersion", "8.0.15")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -197,6 +197,9 @@ namespace projectRest.Migrations
                     b.Property<float>("Total")
                         .HasColumnType("real");
 
+                    b.Property<int>("status")
+                        .HasColumnType("int");
+
                     b.HasKey("OrderID");
 
                     b.HasIndex("CustomerID");
@@ -204,6 +207,35 @@ namespace projectRest.Migrations
                     b.HasIndex("EmployeeID");
 
                     b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("projectRest.Models.OrderProduct", b =>
+                {
+                    b.Property<int>("OrderProductID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderProductID"));
+
+                    b.Property<int>("OrderID")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderProductID");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("OrderProducts");
                 });
 
             modelBuilder.Entity("projectRest.Models.Product", b =>
@@ -346,6 +378,25 @@ namespace projectRest.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("projectRest.Models.OrderProduct", b =>
+                {
+                    b.HasOne("projectRest.Models.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("projectRest.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("projectRest.Models.Rating", b =>

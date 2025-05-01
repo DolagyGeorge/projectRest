@@ -19,5 +19,8 @@ namespace Data
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Reserve> Reserves { get; set; }
         public DbSet<Table> Tables { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+
+
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace projectRest.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -221,6 +221,34 @@ namespace projectRest.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "OrderProducts",
+                columns: table => new
+                {
+                    OrderProductID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderID = table.Column<int>(type: "int", nullable: false),
+                    ProductID = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderProducts", x => x.OrderProductID);
+                    table.ForeignKey(
+                        name: "FK_OrderProducts_Orders_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Orders",
+                        principalColumn: "OrderID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderProducts_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ProductID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Contacts_CustomerID",
                 table: "Contacts",
@@ -230,6 +258,16 @@ namespace projectRest.Migrations
                 name: "IX_Employees_DepartmentID",
                 table: "Employees",
                 column: "DepartmentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderProducts_OrderID",
+                table: "OrderProducts",
+                column: "OrderID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderProducts_ProductID",
+                table: "OrderProducts",
+                column: "ProductID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_CustomerID",
@@ -270,10 +308,7 @@ namespace projectRest.Migrations
                 name: "Offers");
 
             migrationBuilder.DropTable(
-                name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Products");
+                name: "OrderProducts");
 
             migrationBuilder.DropTable(
                 name: "Ratings");
@@ -282,13 +317,19 @@ namespace projectRest.Migrations
                 name: "Reserves");
 
             migrationBuilder.DropTable(
-                name: "Employees");
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "Tables");
 
             migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Tables");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Departments");

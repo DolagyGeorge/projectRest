@@ -1,0 +1,86 @@
+﻿@model List<OrderSummaryView>
+
+<style>
+    body {
+        background-color: #f2f2f2; /* soft beige */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .card-pending {
+        background-color: #ffffff;
+        border-left: 6px solid #f0ad4e; /* orange */
+    }
+
+    .card-done {
+        background-color: #ffffff;
+        border-left: 6px solid #6c757d; /* gray */
+    }
+
+    .card-title {
+        font-weight: 600;
+        color: #343a40;
+    }
+
+    .section-title {
+        margin-top: 30px;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #5c5c5c;
+    }
+
+    .section-container {
+        background-color: #ffffff;
+        border-radius: 12px;
+        padding: 25px;
+        margin-bottom: 40px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .card-text {
+        color: #444;
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+</style>
+
+<!-- Pending Orders -->
+<div class="section-container">
+    <h2 class="section-title">🕒 Pending Orders</h2>
+    <div class="d-flex flex-wrap gap-4">
+        @foreach (var item in Model.Where(o => o.status == 0))
+        {
+            <form asp-action="UpdateStatuses" method="post">
+                <div class="card card-pending shadow-sm rounded" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Order #@item.OrderID</h5>
+                        <p class="card-text">@Html.Raw(item.ProductSummary.Replace("\n", "<br />"))</p>
+                        <input type="hidden" name="orderId" value="@item.OrderID" />
+                        <button type="submit" class="btn btn-warning btn-sm">✅ Mark as Done</button>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+
+<!-- Done Orders -->
+<div class="section-container">
+    <h2 class="section-title">✔️ Completed Orders</h2>
+    <div class="d-flex flex-wrap gap-4">
+        @foreach (var item in Model.Where(o => o.status == 1))
+        {
+            <div class="card card-done shadow-sm rounded" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Order #@item.OrderID</h5>
+                    <p class="card-text">@Html.Raw(item.ProductSummary.Replace("\n", "<br />"))</p>
+                    <button class="btn btn-secondary btn-sm" disabled>✅ Done</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

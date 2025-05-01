@@ -4,6 +4,7 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace projectRest.Migrations
 {
     [DbContext(typeof(ResturantdbContext))]
-    partial class ResturantdbContextModelSnapshot : ModelSnapshot
+    [Migration("20250428231137_intial")]
+    partial class intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -193,9 +196,6 @@ namespace projectRest.Migrations
 
                     b.Property<float>("Total")
                         .HasColumnType("real");
-
-                    b.Property<int>("status")
-                        .HasColumnType("int");
 
                     b.HasKey("OrderID");
 
