@@ -20,6 +20,10 @@ namespace Data
         public DbSet<Reserve> Reserves { get; set; }
         public DbSet<Table> Tables { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+
 
 
     }
