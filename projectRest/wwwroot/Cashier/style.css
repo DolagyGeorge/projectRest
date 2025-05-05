@@ -1,0 +1,41 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.sidebar .btn {
+    width: 100%;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+}
+.sidebar {
+    width: 150px;
+}
+.sidebar .btn i {
+    font-size: 1.5rem;
+}
+
+.order-summary {
+    border-left: 1px solid #dee2e6;
+    width:48vh;
+    overflow-y: auto;
+}
+
+.card img {
+    height: 350px;
+    object-fit: cover;
+}
+
+.card {
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.btn-success {
+    font-weight: bold;
+}
