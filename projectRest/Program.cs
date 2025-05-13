@@ -37,7 +37,7 @@ namespace projectRest
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Cashier}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
         }
