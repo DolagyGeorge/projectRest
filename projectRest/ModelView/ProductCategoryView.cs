@@ -1,4 +1,4 @@
-﻿namespace projectRest.Models
+﻿namespace projectRest.ModelView
 {
     public class ProductCategoryView
     {

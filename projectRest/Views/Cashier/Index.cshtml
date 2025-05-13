@@ -1,4 +1,5 @@
-﻿@model List<ProductCategoryView>
+﻿@using projectRest.ModelView
+@model List<ProductCategoryView>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,7 @@
             <!-- Sidebar -->
             <div class="col-1 bg-light d-flex flex-column align-items-center p-3 sidebar">
                 <button class="btn mb-3 filter-btn" data-filter="All">All</button>
-                @foreach(var category in Model)
+                @foreach (var category in Model.DistinctBy(c => c.CategoryName))
                 {
                     <button class="btn mb-3 filter-btn" data-filter="@category.CategoryName">@category.CategoryName</button>
                 }
