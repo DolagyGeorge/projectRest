@@ -3,9 +3,7 @@
 @{
     Layout = "_AdminLayout";
 }
-<p>
-    <a asp-action="CreateOrdar">Create New</a>
-</p>
+
 
 <div class="main-content">
     <h1 class="h2">Order List</h1>
@@ -21,7 +19,7 @@
         </thead>
         <tbody>
             <p>
-                <a asp-action="CreateOrdar">Create New</a>
+                <a asp-action="CreateOrder">Create New</a>
             </p>
             @foreach (var item in Model) {
                 <tr>
